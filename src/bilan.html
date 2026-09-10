@@ -6,6 +6,114 @@
 	<title>Teva | Synthèse</title>
 	<link rel="stylesheet" href="../style/bilan.css">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Audiowide&display=swap" rel="stylesheet">
+	<style>
+		/* --- Styles du tableau de synthèse E5 : ce bloc est autonome tant qu'il n'a pas
+		     été intégré à bilan.css. Vous pouvez le déplacer là-bas si besoin. --- */
+		.synthese-doc {
+			--sd-ink: #1a2130;
+			--sd-navy: #1d2a44;
+			--sd-navy-deep: #141d33;
+			--sd-line: #d7dce3;
+			--sd-panel: #f6f7fa;
+			--sd-accent: #2f7d4f;
+			--sd-muted: #6b7280;
+			font-family: 'Inter', sans-serif;
+			color: var(--sd-ink);
+			max-width: 1100px;
+			margin: 1.5rem 0;
+			box-shadow: 0 1px 3px rgba(20, 29, 51, 0.08), 0 10px 30px rgba(20, 29, 51, 0.06);
+			border-radius: 10px;
+		}
+
+		.synthese-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			padding: 0.9rem 1.25rem;
+			background: var(--sd-navy);
+			color: #fff;
+			border-radius: 10px 10px 0 0;
+			flex-wrap: wrap;
+		}
+		.synthese-toolbar__file { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
+		.synthese-file-icon {
+			width: 36px; height: 36px; border-radius: 7px; flex-shrink: 0;
+			background: var(--sd-accent);
+			display: flex; align-items: center; justify-content: center;
+			font-size: 0.6rem; font-weight: 700; letter-spacing: 0.02em; color: #fff;
+		}
+		.synthese-toolbar__name { font-weight: 700; font-size: 0.95rem; line-height: 1.3; }
+		.synthese-toolbar__meta { font-size: 0.78rem; color: #c4cbdb; margin-top: 0.1rem; }
+
+		.synthese-download-btn {
+			display: inline-flex; align-items: center; gap: 0.5rem;
+			background: #fff; color: var(--sd-navy-deep);
+			padding: 0.55rem 1rem; border-radius: 8px;
+			font-weight: 700; font-size: 0.85rem;
+			text-decoration: none; white-space: nowrap;
+			transition: background 0.15s ease;
+		}
+		.synthese-download-btn:hover { background: #e9edf5; }
+		.synthese-download-btn:focus-visible { outline: 3px solid #8fb1ff; outline-offset: 2px; }
+		.synthese-download-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+		.synthese-paper {
+			background: #fff;
+			border: 1px solid var(--sd-line);
+			border-top: none;
+			border-radius: 0 0 10px 10px;
+			overflow: hidden;
+		}
+
+		.synthese-letterhead { padding: 1.5rem 1.5rem 1.1rem; border-bottom: 2px solid var(--sd-navy); }
+		.synthese-letterhead__top {
+			display: flex; justify-content: space-between; align-items: baseline;
+			flex-wrap: wrap; gap: 0.4rem;
+			font-weight: 700; font-size: 1rem;
+		}
+		.synthese-letterhead__title {
+			text-align: center; font-weight: 700; font-size: 1.15rem;
+			margin: 0.85rem 0 1.1rem;
+		}
+
+		.synthese-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 2.5rem; font-size: 0.88rem; }
+		.synthese-fields .field-row { display: flex; align-items: center; gap: 0.5rem; }
+		.synthese-fields .field-row span.label { font-weight: 700; white-space: nowrap; }
+		.synthese-fields .fill { flex: 1; border-bottom: 1px solid var(--sd-line); min-height: 1.3em; }
+		.synthese-fields .field-row.full { grid-column: 1 / -1; }
+
+		.synthese-options { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+		.synthese-checkbox { display: inline-flex; align-items: center; gap: 0.35rem; font-weight: 600; }
+		.synthese-checkbox .box {
+			width: 14px; height: 14px; border: 1.5px solid var(--sd-ink); border-radius: 2px; display: inline-block;
+		}
+
+		.synthese-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+		table.synthese-table { border-collapse: collapse; width: 100%; min-width: 960px; font-size: 0.82rem; }
+		.synthese-table th, .synthese-table td { border: 1px solid var(--sd-line); padding: 0.6rem 0.65rem; vertical-align: top; text-align: left; }
+		.synthese-table thead th { background: var(--sd-panel); font-weight: 700; text-align: center; vertical-align: middle; }
+		.synthese-table th.col-competences { width: 230px; text-align: left; }
+		.synthese-table th.col-periode { width: 110px; }
+		.synthese-table .comp-title { font-weight: 700; margin-bottom: 0.45rem; }
+		.synthese-table .comp-list { margin: 0; padding-left: 1.05rem; font-weight: 400; font-size: 0.74rem; line-height: 1.4; text-align: left; color: var(--sd-ink); }
+		.synthese-table .comp-list li { margin-bottom: 0.3rem; }
+		.synthese-table .comp-list li:last-child { margin-bottom: 0; }
+
+		.synthese-table tbody .section-row td {
+			background: var(--sd-navy); color: #fff; font-weight: 700;
+			text-align: center; letter-spacing: 0.01em;
+		}
+		.synthese-table td.realisation { font-weight: 600; }
+		.synthese-table td.mark { text-align: center; font-weight: 700; color: var(--sd-accent); font-size: 1rem; }
+		.synthese-table td.empty-note { text-align: center; font-style: italic; color: var(--sd-muted); background: var(--sd-panel); }
+
+		@media (max-width: 640px) {
+			.synthese-fields { grid-template-columns: 1fr; }
+			.synthese-letterhead__top { flex-direction: column; align-items: flex-start; }
+			.synthese-toolbar { align-items: flex-start; }
+		}
+	</style>
 </head>
 <body class="subpage">
 	<header>
@@ -16,7 +124,6 @@
 				<li><a href="./projects.html">Projets</a></li>
 				<li><a href="./stages.html">Stages</a></li>
 				<li><a href="./veille.html">Veille</a></li>
-				<li><a href="./gestion.html">Gestion</a></li>
 				<li><a href="./bilan.html" class="active">Synthèse</a></li>
 				<li><a href="./contact.html" class="btn-contact">Contact</a></li>
 			</ul>
@@ -26,8 +133,31 @@
 	<main>
 		<section id="bilan" class="container">
 			<h2>Synthèse</h2>
+
 			<div class="content-block">
-				<p><!-- Résumez ici votre bilan général de l'année (compétences acquises, projets marquants, perspectives) --></p>
+				<p>Ce tableau récapitule, compétence par compétence, les réalisations que j'ai menées en formation et en entreprise dans le cadre de l'épreuve E5. Le fichier original (annexe officielle BTS SIO) est disponible en téléchargement.</p>
+
+				<div class="synthese-doc">
+					<div class="synthese-toolbar">
+						<div class="synthese-toolbar__file">
+							<span class="synthese-file-icon">XLSX</span>
+							<div>
+								<div class="synthese-toolbar__name">Tableau de synthèse des réalisations — Épreuve E5</div>
+								<div class="synthese-toolbar__meta">BTS SIO · Annexe 8-1 · Session 2025</div>
+							</div>
+						</div>
+						<a class="synthese-download-btn"
+						   href="../assets/tableau-de-synthese-E5-2025.xlsx"
+						   download="Tableau_de_synthese_E5_2025.xlsx">
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M12 3v12"></path>
+								<path d="M7 10l5 5 5-5"></path>
+								<path d="M5 21h14"></path>
+							</svg>
+							Télécharger le fichier .xlsx
+						</a>
+					</div>
+				</div>
 			</div>
 		</section>
 	</main>
