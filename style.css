@@ -242,6 +242,59 @@ h2 {
     color: white;
 }
 
+/* --- Timeline (Mon parcours) --- */
+.timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 5%;
+    right: 5%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--accent), var(--accent), transparent);
+    opacity: 0.6;
+}
+
+.timeline-item {
+    position: relative;
+    flex: 1;
+    text-align: center;
+    padding: 0 1.5rem;
+}
+
+.timeline-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+    margin: 0 auto 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-year {
+    display: inline-block;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.timeline-item h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    text-shadow: none;
+}
+
 /* --- Grid Projets --- */
 .projects-section { padding: 4rem 10%; }
 
@@ -374,4 +427,30 @@ footer {
     h1 { font-size: 2.5rem; }
     .nav-links { display: none; } /* On pourrait ajouter un menu burger plus tard */
     .evaluation-grid { grid-template-columns: 1fr; }
+
+    .timeline {
+        flex-direction: column;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+    .timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 9px;
+        width: 2px;
+        height: auto;
+        background: linear-gradient(to bottom, transparent, var(--accent), var(--accent), transparent);
+    }
+    .timeline-item {
+        text-align: left;
+        padding-left: 2.5rem;
+        padding-right: 0;
+        width: 100%;
+    }
+    .timeline-dot {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0;
+    }
 }
