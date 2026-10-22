@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 56">
+  <!-- Poignée de sabre laser (style classique) : pommeau, grip, boîtier d'activation, émetteur -->
+  <defs>
+    <!-- Chrome cylindrique : reflet spéculaire net en haut, liseré de lumière en bas -->
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3f45"/>
+      <stop offset="0.12" stop-color="#8b9198"/>
+      <stop offset="0.24" stop-color="#ffffff"/>
+      <stop offset="0.32" stop-color="#e4e8ec"/>
+      <stop offset="0.55" stop-color="#8e949b"/>
+      <stop offset="0.8" stop-color="#474c52"/>
+      <stop offset="0.92" stop-color="#26292d"/>
+      <stop offset="1" stop-color="#6a7077"/>
+    </linearGradient>
+    <!-- Métal sombre (anodisé) -->
+    <linearGradient id="gunmetal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1f23"/>
+      <stop offset="0.2" stop-color="#5b6168"/>
+      <stop offset="0.3" stop-color="#9aa1a9"/>
+      <stop offset="0.45" stop-color="#3c4046"/>
+      <stop offset="0.85" stop-color="#15171a"/>
+      <stop offset="1" stop-color="#3a3e44"/>
+    </linearGradient>
+    <!-- Caoutchouc noir des bandes du grip -->
+    <linearGradient id="rubber" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0c0d0f"/>
+      <stop offset="0.22" stop-color="#3d4248"/>
+      <stop offset="0.3" stop-color="#22252a"/>
+      <stop offset="0.75" stop-color="#090a0b"/>
+      <stop offset="1" stop-color="#1e2125"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffb3ab"/>
+      <stop offset="0.35" stop-color="#e3261d"/>
+      <stop offset="1" stop-color="#5a0905"/>
+    </linearGradient>
+    <radialGradient id="bubble" cx="0.35" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="0.25" stop-color="#9aa3ad"/>
+      <stop offset="1" stop-color="#14161a"/>
+    </radialGradient>
+    <radialGradient id="screw" cx="0.35" cy="0.35" r="0.7">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#8d939a"/>
+      <stop offset="1" stop-color="#2a2d31"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Pommeau -->
+  <rect x="0" y="14" width="8" height="28" rx="3" fill="url(#gunmetal)"/>
+  <rect x="8" y="15" width="8" height="26" rx="1" fill="url(#chrome)"/>
+  <rect x="11" y="15" width="1.5" height="26" fill="#1a1c1f"/>
+  <circle cx="4" cy="28" r="3" fill="#0b0c0e"/>
+  <circle cx="4" cy="28" r="1.2" fill="#3a3e44"/>
+
+  <!-- Corps chromé -->
+  <rect x="16" y="17" width="182" height="22" fill="url(#chrome)"/>
+  <rect x="16" y="17" width="182" height="0.8" fill="#ffffff" opacity="0.5"/>
+
+  <!-- Grip : bandes de caoutchouc (T-tracks) avec rainures -->
+  <g id="track">
+    <rect x="26" y="13" width="10" height="30" rx="2.5" fill="url(#rubber)"/>
+    <rect x="28" y="15" width="6" height="1.4" rx="0.7" fill="#ffffff" opacity="0.22"/>
+    <rect x="30.4" y="16" width="1.2" height="24" fill="#000000" opacity="0.55"/>
+  </g>
+  <use href="#track" x="15"/>
+  <use href="#track" x="30"/>
+  <use href="#track" x="45"/>
+  <use href="#track" x="60"/>
+  <use href="#track" x="75"/>
+  <use href="#track" x="90"/>
+
+  <!-- Bague entre le grip et le boîtier -->
+  <rect x="128" y="15" width="6" height="26" rx="1" fill="url(#gunmetal)"/>
+
+  <!-- Boîtier d'activation (clamp) -->
+  <rect x="136" y="12" width="58" height="32" rx="2.5" fill="url(#gunmetal)"/>
+  <rect x="138" y="14" width="54" height="3" fill="#ffffff" opacity="0.18"/>
+  <circle cx="141" cy="22" r="2" fill="url(#screw)"/>
+  <circle cx="189" cy="22" r="2" fill="url(#screw)"/>
+  <!-- Rangée de bulles de verre -->
+  <rect x="142" y="35" width="46" height="8" rx="1.5" fill="#08090a"/>
+  <g fill="url(#bubble)">
+    <ellipse cx="148" cy="39" rx="2.6" ry="2.4"/>
+    <ellipse cx="155" cy="39" rx="2.6" ry="2.4"/>
+    <ellipse cx="162" cy="39" rx="2.6" ry="2.4"/>
+    <ellipse cx="169" cy="39" rx="2.6" ry="2.4"/>
+    <ellipse cx="176" cy="39" rx="2.6" ry="2.4"/>
+    <ellipse cx="183" cy="39" rx="2.6" ry="2.4"/>
+  </g>
+  <!-- Bouton d'activation rouge -->
+  <rect x="155" y="6" width="18" height="8" rx="2.5" fill="url(#red)"/>
+  <rect x="157.5" y="7.2" width="11" height="1.8" rx="0.9" fill="#ffffff" opacity="0.7"/>
+
+  <!-- Col -->
+  <rect x="198" y="18" width="16" height="20" fill="url(#gunmetal)"/>
+  <rect x="203" y="18" width="2" height="20" fill="#0a0b0c"/>
+  <rect x="208" y="18" width="2" height="20" fill="#0a0b0c"/>
+
+  <!-- Émetteur évasé, percé de trous en demi-lune -->
+  <path d="M214 15 L288 6 L288 50 L214 41 Z" fill="url(#chrome)"/>
+  <path d="M214 15 L288 6 L288 8 L214 17 Z" fill="#ffffff" opacity="0.5"/>
+  <g fill="#0d0e10">
+    <path d="M232 24 a4 5.5 0 1 1 0 8 a2.6 4 0 1 0 0 -8 Z"/>
+    <path d="M249 23 a4.4 6.2 0 1 1 0 10 a2.8 4.6 0 1 0 0 -10 Z"/>
+    <path d="M266 22 a4.8 7 0 1 1 0 12 a3 5.2 0 1 0 0 -12 Z"/>
+  </g>
+  <!-- Bague de sortie de la lame -->
+  <rect x="286" y="4" width="10" height="48" rx="2" fill="url(#chrome)"/>
+  <rect x="294" y="8" width="6" height="40" rx="1.5" fill="#101114"/>
+</svg>

@@ -4,13 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Teva | Projet CRM Nice Volley-Ball</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../../style/theme.css">
 	<link rel="stylesheet" href="../../style/projects-css/projet-crm.css">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Audiowide&display=swap" rel="stylesheet">
 </head>
-<body class="subpage">
+<body class="subpage saber-cyan">
 	<header>
 		<nav class="navbar">
-			<div class="logo">PORTFOLIO</div>
+			<div class="logo"><span class="logo-saber"></span>PORTFOLIO</div>
 			<ul class="nav-links">
 				<li><a href="../../index.html">Accueil</a></li>
 				<li><a href="../projects.html" class="active">Projets</a></li>
@@ -26,9 +27,10 @@
 		<!-- ===== En-tête du projet ===== -->
 		<section class="project-hero container">
 			<a href="../projects.html" class="back-link">&larr; Retour aux projets</a>
-			<p class="eyebrow">Semaine intensive · Projet SLAM / SISR · Classe IRIS 1 · 2025 – 2026</p>
+			<p class="eyebrow">Projet SLAM / SISR · BTS SIO · Sprint MVP juin 2026 · Finalisation septembre 2026</p>
 			<h1>CRM interne — Nice Volley-Ball</h1>
-			<p class="subtitle">Prototype de dashboard pour centraliser les données de la billetterie, des contacts et améliorer la communication du club.</p>
+			<p class="subtitle">Tableau de bord centralisant les données de la billetterie et des contacts du club, pour améliorer sa communication.</p>
+			<div class="saber" aria-hidden="true"><span class="hilt"></span><span class="blade"></span></div>
 		</section>
 
 		<!-- ===== Contexte ===== -->
@@ -36,6 +38,7 @@
 			<h2>Contexte</h2>
 			<div class="content-block">
 				<p>Le Nice Volley-Ball utilise aujourd'hui plusieurs outils séparés : <strong>Weezevent</strong> pour la billetterie, <strong>Brevo</strong> pour les newsletters et les contacts, des fichiers Excel ou Google Sheets pour certains suivis manuels, ainsi que des outils institutionnels comme l'extranet de la <strong>FFVB</strong>. Ces outils sont utiles pris séparément, mais ils ne communiquent pas suffisamment entre eux.</p>
+				<p>Le club souhaite disposer d'un <strong>tableau de bord centralisant ses informations</strong>. Le projet est découpé en trois phases : un MVP local dockerisé livré en juin (phase 1), sa finalisation en septembre par 5 étudiants SLAM (phase 2), puis son déploiement par les étudiants SISR (phase 3).</p>
 			</div>
 		</section>
 
@@ -44,6 +47,118 @@
 			<h2>Problématique</h2>
 			<div class="content-block">
 				<p>Le problème principal est la <strong>dispersion des données</strong>. Le club ne dispose pas d'une vision claire du parcours d'un supporter : première venue, nombre de matchs vus, intérêt pour les abonnements, présence en famille, potentiel merchandising, réaction aux campagnes ou retour après un événement. Les communications restent trop générales et les relances ne sont pas assez automatisées.</p>
+			</div>
+		</section>
+
+		<!-- ===== Besoin et objectifs ===== -->
+		<section class="container">
+			<h2>Besoin et objectifs</h2>
+			<div class="roles-grid">
+				<div class="role-card">
+					<h3>Besoin</h3>
+					<p>Permettre aux utilisateurs autorisés du club de consulter et gérer leurs données depuis un tableau de bord Web fiable. Il s'agit de stabiliser l'application existante et de la rendre livrable (image Docker) pour son futur hébergement.</p>
+				</div>
+				<div class="role-card">
+					<h3>Objectif de l'équipe</h3>
+					<p>Terminer, tester et documenter l'application, puis produire une image Docker reproductible accompagnée d'une passation technique exploitable par les SISR.</p>
+				</div>
+			</div>
+			<div class="role-card">
+				<h3>Mon objectif (pôle backend)</h3>
+				<p>Développer, tester et documenter les routes de l'API (Slim / PHP) utilisées par l'interface pour ses appels <code>fetch</code>, de façon qu'elles soient validées lors de la recette applicative.</p>
+			</div>
+		</section>
+
+		<!-- ===== Parties prenantes ===== -->
+		<section class="container">
+			<h2>Parties prenantes</h2>
+			<div class="table-scroll">
+				<table class="data-table">
+					<thead>
+						<tr><th>Partie prenante</th><th>Rôle dans le projet</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>Club Nice Volley-Ball</td><td>Exprime le besoin, utilise le service et valide les fonctionnalités.</td></tr>
+						<tr><td>Équipe SLAM (5 étudiants)</td><td>Réalise et finalise la solution applicative, dont mes routes API.</td></tr>
+						<tr><td>Équipe SISR</td><td>Reprend l'image Docker et déploie l'application sur un VPS en phase 3.</td></tr>
+						<tr><td>Encadrement pédagogique</td><td>Cadre, suit et évalue le projet.</td></tr>
+						<tr><td>Services externes</td><td>Weezevent et Brevo, dont les clés d'accès doivent être protégées.</td></tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+		<!-- ===== Ressources et contraintes ===== -->
+		<section class="container">
+			<h2>Ressources et contraintes</h2>
+			<ul class="tag-list">
+				<li class="tag">Slim (API PHP)</li>
+				<li class="tag">JavaScript vanilla + fetch</li>
+				<li class="tag">MERISE</li>
+				<li class="tag">Docker</li>
+				<li class="tag">GitHub</li>
+				<li class="tag">API Weezevent</li>
+				<li class="tag">API Brevo</li>
+			</ul>
+			<div class="content-block block-gap">
+				<p><strong>Contraintes confirmées :</strong></p>
+				<ul>
+					<li>Semaine de finalisation limitée, et déploiement final hors périmètre (phase 3).</li>
+					<li>Ne pas repartir de zéro : on stabilise l'application livrée en juin.</li>
+					<li>Aucune clé Weezevent ou Brevo versionnée dans le dépôt.</li>
+					<li>Données personnelles masquées dans les captures (RGPD).</li>
+					<li>Image Docker reproductible.</li>
+				</ul>
+				<p><strong>Contraintes de capacité :</strong> la durée d'une tâche dépend de la disponibilité réelle de chacun, et plusieurs étudiants SLAM peuvent avoir besoin du même environnement de test en même temps.</p>
+			</div>
+		</section>
+
+		<!-- ===== Organisation ===== -->
+		<section class="container">
+			<h2>Organisation</h2>
+			<p class="section-intro">Une approche combinée : une planification prédictive pour les grandes phases, car les SISR dépendent de l'image Docker livrée par les SLAM, et une logique agile pour les fonctionnalités (MVP en juin, puis améliorations vérifiées à la recette).</p>
+			<ol class="steps">
+				<li>
+					<span class="step-meta">Juin 2026</span>
+					<h3>Phase 1 — MVP</h3>
+					<p>Premier tableau de bord local et dockerisé, présenté en fin de sprint.</p>
+				</li>
+				<li>
+					<span class="step-meta">Septembre 2026</span>
+					<h3>Phase 2 — Finalisation SLAM</h3>
+					<p>Stabilisation, tests, documentation et production de l'image Docker.</p>
+				</li>
+				<li>
+					<span class="step-meta">Phase 3</span>
+					<h3>Déploiement SISR</h3>
+					<p>Reprise de l'image Docker et mise en ligne sur un VPS.</p>
+				</li>
+			</ol>
+
+			<h3 class="sub-heading">Dépendances entre les tâches</h3>
+			<ul class="flow">
+				<li>Routes de l'API</li>
+				<li>Interface</li>
+				<li>Tests de recette</li>
+				<li>Image Docker</li>
+				<li>Déploiement SISR</li>
+			</ul>
+
+			<h3 class="sub-heading">Planning du sprint MVP (diagramme de Gantt)</h3>
+			<div class="table-scroll">
+				<table class="data-table">
+					<thead>
+						<tr><th>Tâche</th><th>Attribuée à</th><th>Début</th><th>Fin</th><th>Jours</th></tr>
+					</thead>
+					<tbody>
+						<tr><td>Identifier les besoins du commanditaire</td><td>Équipe dev</td><td>15/06/2026</td><td>15/06/2026</td><td>1</td></tr>
+						<tr><td>Réaliser le MCD</td><td>Pôle Merise</td><td>15/06/2026</td><td>16/06/2026</td><td>2</td></tr>
+						<tr><td>Mise en place de l'environnement</td><td>Pôle déploiement</td><td>15/06/2026</td><td>17/06/2026</td><td>3</td></tr>
+						<tr><td>Mise en place de l'API Slim</td><td>Pôle back-end</td><td>15/06/2026</td><td>16/06/2026</td><td>2</td></tr>
+						<tr><td>Développement des routes</td><td>Pôle back-end</td><td>16/06/2026</td><td>18/06/2026</td><td>3</td></tr>
+						<tr><td>Présentation du MVP</td><td>Pôle gestion</td><td>19/06/2026</td><td>19/06/2026</td><td>1</td></tr>
+					</tbody>
+				</table>
 			</div>
 		</section>
 
@@ -62,10 +177,110 @@
 			</div>
 			<div class="role-card">
 				<h3>Mon rôle</h3>
-				<p>En tant qu'étudiant SLAM, j'ai été placé dans le rôle de développeur backend, responsable de l'intégration des APIs et de la gestion des données.</p>
+				<p>En tant qu'étudiant SLAM, j'ai été placé dans le rôle de développeur backend, responsable de l'intégration des APIs et de la gestion des données. Mes tâches étaient organisées par priorité : d'abord les routes bloquantes pour l'interface, puis les tests, puis la documentation. Tout blocage était signalé pour mettre à jour le planning collectif.</p>
+			</div>
+
+			<h3 class="sub-heading">Découpage de mes tâches (pôle backend)</h3>
+			<ol class="steps">
+				<li>
+					<h3>B1 — Identifier les routes</h3>
+					<p>Lister les routes nécessaires aux appels de l'interface. Résultat : une liste de routes validée avec le front.</p>
+				</li>
+				<li>
+					<h3>B2 — Développer les routes</h3>
+					<p>Coder les routes de l'API Slim / PHP et gérer les cas d'erreur. Résultat : des routes fonctionnelles et testables.</p>
+				</li>
+				<li>
+					<h3>B3 — Tests de recette</h3>
+					<p>Tester les routes. Résultat : les résultats des tests et les anomalies identifiées.</p>
+				</li>
+				<li>
+					<h3>B4 — Corriger et documenter</h3>
+					<p>Corriger les anomalies et documenter les routes. Résultat : des routes corrigées et une documentation à jour.</p>
+				</li>
+			</ol>
+		</section>
+
+		<!-- ===== Livrables ===== -->
+		<section class="container">
+			<h2>Livrables et critères de validation</h2>
+			<div class="roles-grid">
+				<div class="role-card">
+					<h3>Routes de l'API (Slim / PHP)</h3>
+					<p>Permettre à l'interface d'obtenir et d'enregistrer les données via des appels API.</p>
+					<p class="validation"><strong>Validation :</strong> chaque route renvoie le code HTTP et le JSON attendus, les cas d'erreur (données invalides, ressource absente) sont gérés, et les routes sont vérifiées en recette.</p>
+				</div>
+				<div class="role-card">
+					<h3>Tests de recette des routes</h3>
+					<p>Prouver que l'API fonctionne conformément aux exigences.</p>
+					<p class="validation"><strong>Validation :</strong> scénarios de test définis, résultats conservés (valides ou en écart) et reliés à la matrice de traçabilité.</p>
+				</div>
+			</div>
+			<div class="role-card">
+				<h3>Documentation des routes</h3>
+				<p>Permettre au front de les utiliser et aux SISR de comprendre le service.</p>
+				<p class="validation"><strong>Validation :</strong> pour chaque route, la méthode, l'URL, les paramètres, les réponses et les erreurs sont décrits, à jour avec le code.</p>
 			</div>
 		</section>
 
+		<!-- ===== Suivi du projet ===== -->
+		<section class="container">
+			<h2>Suivi et analyse des écarts</h2>
+			<div class="table-scroll">
+				<table class="data-table">
+					<thead>
+						<tr><th>Indicateur</th><th>Prévu</th><th>Réel</th><th>Écart</th><th>Cause et conséquence</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Délai — réalisation complète du CRM</td>
+							<td>2 semaines</td>
+							<td>2 semaines</td>
+							<td><span class="status status-ok">Pas d'écart</span></td>
+							<td>—</td>
+						</tr>
+						<tr>
+							<td>Charge — temps de travail de l'équipe</td>
+							<td>8 h / jour</td>
+							<td>10 h / jour</td>
+							<td><span class="status status-warn">+2 h / jour</span></td>
+							<td>Blocage sur le développement backend, rattrapé par des heures supplémentaires des développeurs disponibles.</td>
+						</tr>
+						<tr>
+							<td>Qualité — test de validation du CRM</td>
+							<td>Boutons de synchronisation fonctionnels, appels API réussis avec un délai minimal</td>
+							<td>Tests de vitesse et de synchronisation réussis, aucun échec d'appel</td>
+							<td><span class="status status-ok">Pas d'écart</span></td>
+							<td>—</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="roles-grid block-gap">
+				<div class="role-card">
+					<h3>Demande de changement</h3>
+					<dl class="change-request">
+						<dt>Demande</dt><dd>Ajouter un export des nouveaux spectateurs du club.</dd>
+						<dt>Origine</dt><dd>Commanditaire</dd>
+						<dt>Impact</dt><dd>Environ 3 h de travail supplémentaire (développement et tests).</dd>
+						<dt>Décision</dt><dd>Reportée à la version finale : la demande est conservée et le périmètre initial maintenu.</dd>
+					</dl>
+				</div>
+				<div class="role-card">
+					<h3>Vérification de conformité</h3>
+					<dl class="change-request">
+						<dt>Critère</dt><dd>Appel API réussi.</dd>
+						<dt>Vérification</dt><dd>Faire un appel à l'API et recevoir une réponse 200.</dd>
+						<dt>Résultat</dt><dd>L'appel est réussi.</dd>
+						<dt>Responsable</dt><dd>Pôle backend</dd>
+						<dt>Statut</dt><dd><span class="status status-ok">Conforme</span></dd>
+					</dl>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== Captures ===== -->
 		<section class="container">
 			<h2>Visualisation des réalisations</h2>
 			<div class="screens-grid">
@@ -78,8 +293,12 @@
 					<figcaption>Appel API Weezevent — récupération des événements</figcaption>
 				</figure>
 				<figure class="card">
-					<img src="../../img/Capture d'écran 2026-09-10 231810.png" alt="appel api pour récupérer les contacts">
-					<figcaption></figcaption>
+					<img src="../../img/Capture d'écran 2026-09-10 231810.png" alt="Code de la route Slim GET /api/contacts">
+					<figcaption>Route Slim <code>GET /api/contacts</code> — liste des contacts, avec une erreur 500 gérée en cas d'échec</figcaption>
+				</figure>
+				<figure class="card">
+					<img src="../../img/Capture d'écran 2026-09-10 231853.png" alt="Code de la route Slim GET /api/contacts/{id}">
+					<figcaption>Route Slim <code>GET /api/contacts/{id}</code> — détail d'un contact, avec une réponse 404 si le contact est introuvable</figcaption>
 				</figure>
 			</div>
 		</section>
@@ -87,6 +306,7 @@
 
 	<footer>
 		<p>&copy; 2026 Teva - Tous droits réservés</p>
+		<p class="photo-credit">Cristal en fond : photo « <a href="https://commons.wikimedia.org/wiki/File:Quartz,_Tibet.jpg" target="_blank" rel="noopener noreferrer">Quartz, Tibet</a> » de JJ Harrison, licence <a href="https://creativecommons.org/licenses/by-sa/2.5/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.5</a>, via Wikimedia Commons</p>
 	</footer>
 </body>
 </html>

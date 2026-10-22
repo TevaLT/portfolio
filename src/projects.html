@@ -4,13 +4,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Teva | Projets</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../style/theme.css">
 	<link rel="stylesheet" href="../style/projects.css">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Audiowide&display=swap" rel="stylesheet">
 </head>
-<body class="subpage">
+<body class="subpage saber-green">
 	<header>
 		<nav class="navbar">
-			<div class="logo">PORTFOLIO</div>
+			<div class="logo"><span class="logo-saber"></span>PORTFOLIO</div>
 			<ul class="nav-links">
 				<li><a href="../index.html">Accueil</a></li>
 				<li><a href="./projects.html" class="active">Projets</a></li>
@@ -24,7 +25,8 @@
 
 	<main>
 		<section id="projects" class="projects-section">
-			<h2>Mes Réalisations</h2>
+			<h2 data-kicker="Archives Jedi">Mes Réalisations</h2>
+			<div class="saber" aria-hidden="true"><span class="hilt"></span><span class="blade"></span></div>
 			<div class="projects-grid">
 				<div class="project-card">
 					<div class="project-image">
@@ -36,13 +38,14 @@
 						<button class="btn-detail" onclick="toggleDetails(this)">Détails techniques <span class="arrow">▼</span></button>
 					</div>
 					<div class="project-details">
-						<p><strong>Technologies :</strong> HTML, CSS, JavaScript...</p>
+						<p><strong>Technologies :</strong> API Slim (PHP), JavaScript + fetch, MERISE, Docker</p>
+						<p><strong>Mon rôle :</strong> pôle backend (routes de l'API)</p>
 						<p><a href="./projects/projet-crm.html" class="detail-link">Voir la page complète du projet &rarr;</a></p>
 					</div>
 				</div>
 
 				<div class="project-card">
-					<div class="project-image">
+					<div class="project-image logo-image">
 						<img src="../img/Logo IRIS SPACE.svg" alt="Projet Iris space">
 					</div>
 					<div class="project-info">
@@ -51,7 +54,9 @@
 						<button class="btn-detail" onclick="toggleDetails(this)">Détails techniques <span class="arrow">▼</span></button>
 					</div>
 					<div class="project-details">
-						<p><strong>Technologies :</strong> HTML, CSS, JavaScript...</p>
+						<p><strong>Technologies :</strong> React, Vite, Tailwind CSS, daisyUI</p>
+						<p><strong>Mon rôle :</strong> pages Absences (administration), tableau de bord et notes (élève)</p>
+						<p><a href="./projects/iris-space.html" class="detail-link">Voir la page complète du projet &rarr;</a></p>
 					</div>
 				</div>
 			</div>
@@ -60,6 +65,7 @@
 
 	<footer>
 		<p>&copy; 2026 Teva - Tous droits réservés</p>
+		<p class="photo-credit">Cristal en fond : photo « <a href="https://commons.wikimedia.org/wiki/File:Quartz,_Tibet.jpg" target="_blank" rel="noopener noreferrer">Quartz, Tibet</a> » de JJ Harrison, licence <a href="https://creativecommons.org/licenses/by-sa/2.5/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.5</a>, via Wikimedia Commons</p>
 	</footer>
 
 	<script>

@@ -1,155 +1,19 @@
-/* ===== veille.css — styles de la page Veille Technologique (veille.html) ===== */
-
-@font-face {
-    font-family: 'inter';
-    src: url('font/Inter_18pt-Regular.woff2') format('woff2'),
-         url('font/Inter_18pt-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-:root {
-    --bg-color: #0d0b14;
-    --text-dim: #a78bfa;
-    --accent: #a855f7;
-    --accent-glow: #7c3aed;
-    --accent-hover: #d8b4fe;
-    --gold: #d4af37;
-    --card-bg: rgba(30, 20, 50, 0.6);
-    background-color: var(--bg-color);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    color: var(--accent);
-    line-height: 1.6;
-    background-color: var(--bg-color);
-    background-image: url(./img/bg.webp);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-}
-
-.container {
-    padding: 4rem 10%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* --- Navbar --- */
-.navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 10%;
-    background: rgba(11, 14, 20, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(0, 168, 232, 0.3);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-}
-
-.logo {
-    font-family: 'Audiowide', cursive;
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent-glow);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 1.5rem;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-dim);
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: var(--accent);
-    text-shadow: 0 0 8px var(--accent-glow);
-}
-
-.nav-links a.active {
-    color: var(--accent);
-    text-shadow: 0 0 8px var(--accent-glow);
-}
-
-.btn-contact {
-    border: 1px solid var(--gold) !important;
-    color: var(--gold) !important;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-}
-
-.btn-contact:hover {
-    background: var(--gold);
-    color: #000 !important;
-    box-shadow: 0 0 15px var(--gold);
-}
-
-/* Espace sous la navbar fixe (pas de hero sur cette page) */
-body.subpage main {
-    padding-top: 80px;
-}
-
-/* --- Titres --- */
-h1, h2, h3, h4 {
-    color: #fff;
-    text-shadow: 0 0 15px var(--accent-glow);
-}
-
-h2 {
-    font-family: 'Audiowide', cursive;
-    font-size: 2.2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-    text-shadow: 0 0 10px var(--accent-glow);
-}
-
-/* --- Bloc de contenu générique --- */
-.content-block {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: 15px;
-    border-left: 4px solid var(--accent);
-    color: white;
-}
+/* ===== veille.css — page Veille Technologique (veille.html) — sabre rouge ===== */
 
 /* --- Thématique de veille --- */
-.veille-topic {
-    margin-top: 1rem;
-}
-
 .veille-topic h3 {
-    font-family: 'Audiowide', cursive;
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 0 8px var(--accent-glow);
+    max-width: 860px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.5;
+    text-shadow: 0 0 14px var(--saber-glow);
 }
 
-/* --- Cartes de veille --- */
+/* --- Cartes de veille (holocrons) --- */
 .veille-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -157,77 +21,89 @@ h2 {
 }
 
 .veille-card {
+    position: relative;
     display: flex;
     flex-direction: column;
-    background: var(--card-bg);
-    border: 1px solid rgba(168, 85, 247, 0.2);
-    border-left: 4px solid var(--accent);
-    border-radius: 15px;
-    padding: 1.75rem;
-    color: white;
-    transition: 0.3s;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.9rem;
+    backdrop-filter: blur(6px);
+    transition: transform 0.35s, border-color 0.35s, box-shadow 0.35s;
+}
+
+/* Lame verticale qui s'allume sur le bord gauche */
+.veille-card::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 16px;
+    bottom: 16px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--saber-core);
+    box-shadow: var(--blade-glow);
+    transform: scaleY(0.25);
+    transform-origin: top;
+    transition: transform 0.5s cubic-bezier(.2, .8, .2, 1);
 }
 
 .veille-card:hover {
-    border-color: var(--accent);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
     transform: translateY(-6px);
+    border-color: var(--saber-soft);
+    box-shadow: 0 14px 40px -14px var(--saber-glow);
+}
+
+.veille-card:hover::before {
+    transform: scaleY(1);
 }
 
 .veille-source {
     display: block;
-    color: var(--gold);
+    color: var(--saber);
     text-transform: uppercase;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    margin-bottom: 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.7rem;
 }
 
 .veille-card h4 {
-    font-family: 'Inter', sans-serif;
-    font-size: 1.15rem;
-    margin-bottom: 0.8rem;
-    text-shadow: none;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.9rem;
 }
 
 .veille-card p {
     color: var(--text-dim);
     font-size: 0.95rem;
     flex-grow: 1;
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.3rem;
 }
 
 .veille-link {
     align-self: flex-start;
-    color: var(--accent);
+    color: var(--saber);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    font-weight: 600;
     transition: 0.3s;
 }
 
 .veille-link:hover {
-    color: var(--accent-hover);
-    text-shadow: 0 0 8px var(--accent-glow);
+    color: #fff;
+    text-shadow: 0 0 10px var(--saber-glow);
 }
 
 .veille-refs {
     font-size: 0.8rem;
-    color: rgba(167, 139, 250, 0.7);
+    color: var(--text-dim);
     font-style: italic;
-}
-
-/* --- Footer --- */
-footer {
-    padding: 3rem;
-    text-align: center;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    color: #fff;
-    text-shadow: 0 0 15px var(--accent-glow);
+    opacity: 0.8;
 }
 
 /* --- Mobile --- */
 @media (max-width: 768px) {
-    .nav-links { display: none; }
     .veille-grid { grid-template-columns: 1fr; }
 }

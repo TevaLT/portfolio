@@ -1,0 +1,1137 @@
+/* ===== theme.css — thème Star Wars commun à toutes les pages =====
+   Chaque page choisit la couleur de son sabre laser via une classe sur <body> :
+   saber-blue, saber-green, saber-cyan, saber-yellow, saber-orange,
+   saber-red, saber-white, saber-dark (sabre noir). */
+
+:root {
+    /* Couleurs des sabres : teinte de la lame / halo */
+    --c-blue: #4db5ff;    --g-blue: #0a6cff;     /* Obi-Wan, Anakin */
+    --c-green: #5cff7a;   --g-green: #00c43a;    /* Yoda, Luke */
+    --c-cyan: #4ff8ff;    --g-cyan: #00b4d8;     /* Cal Kestis */
+    --c-yellow: #ffe347;  --g-yellow: #ffae00;   /* Rey, Gardiens du Temple */
+    --c-orange: #ffa040;  --g-orange: #ff5a00;   /* Sabres de l'Ancienne République */
+    --c-red: #ff4848;     --g-red: #e00012;      /* Sith */
+    --c-white: #f5f9ff;   --g-white: #9fcfff;    /* Ahsoka */
+    --c-dark: #d7dce4;    --g-dark: #ffffff;     /* Sabre noir (Darksaber) */
+    --c-pink: #ff6fb5;    --g-pink: #ff1f7a;     /* Sabre rose */
+
+    --bg: #04060b;
+    --panel: rgba(10, 14, 24, 0.72);
+    --panel-solid: #0a0e18;
+    --text: #d6dceb;
+    --text-dim: #8f9ab0;
+    --line: rgba(255, 255, 255, 0.08);
+    --sw-yellow: #ffe81f; /* Jaune du logo et du texte déroulant */
+    --hilt: linear-gradient(#eef1f5, #8a9099 45%, #3a3f46);
+}
+
+/* --- Sabre de la page --- */
+body {
+    --saber: var(--c-blue);
+    --saber-glow: var(--g-blue);
+    --saber-core: #ffffff;
+}
+body.saber-green  { --saber: var(--c-green);  --saber-glow: var(--g-green); }
+body.saber-cyan   { --saber: var(--c-cyan);   --saber-glow: var(--g-cyan); }
+body.saber-yellow { --saber: var(--c-yellow); --saber-glow: var(--g-yellow); }
+body.saber-orange { --saber: var(--c-orange); --saber-glow: var(--g-orange); }
+body.saber-red    { --saber: var(--c-red);    --saber-glow: var(--g-red); }
+body.saber-white  { --saber: var(--c-white);  --saber-glow: var(--g-white); }
+body.saber-dark   { --saber: var(--c-dark);   --saber-glow: var(--g-dark); --saber-core: #050505; }
+body.saber-pink   { --saber: var(--c-pink);   --saber-glow: var(--g-pink); }
+
+/* Variantes translucides, calculées après le choix du sabre */
+body {
+    --saber-soft: color-mix(in srgb, var(--saber) 28%, transparent);
+    --saber-faint: color-mix(in srgb, var(--saber) 10%, transparent);
+    --blade-glow: 0 0 4px var(--saber), 0 0 12px var(--saber-glow), 0 0 28px var(--saber-glow);
+}
+
+/* --- Global --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 70% 50% at 15% 0%, color-mix(in srgb, var(--saber-glow) 16%, transparent), transparent 70%),
+        radial-gradient(ellipse 60% 50% at 95% 100%, rgba(40, 60, 130, 0.22), transparent 70%);
+    background-attachment: fixed;
+}
+
+/* Champ d'étoiles (deux couches, la seconde scintille) */
+body::before,
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Chaque couche a sa propre taille de motif (nombres premiers entre eux)
+   pour éviter un effet de grille régulière */
+body::before {
+    background-image:
+        radial-gradient(1px 1px at 25px 35px, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 120px 80px, rgba(255, 255, 255, 0.75) 50%, transparent 51%),
+        radial-gradient(1.5px 1.5px at 170px 150px, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 60px 175px, rgba(255, 255, 255, 0.55) 50%, transparent 51%),
+        radial-gradient(1px 1px at 205px 20px, rgba(200, 220, 255, 0.9) 50%, transparent 51%),
+        radial-gradient(1px 1px at 90px 260px, rgba(255, 255, 255, 0.6) 50%, transparent 51%);
+    background-size: 211px 197px, 263px 239px, 331px 307px, 179px 223px, 401px 367px, 293px 281px;
+}
+
+body::after {
+    background-image:
+        radial-gradient(1.5px 1.5px at 80px 300px, #fff 50%, transparent 51%),
+        radial-gradient(1px 1px at 330px 60px, rgba(255, 240, 220, 0.9) 50%, transparent 51%),
+        radial-gradient(2px 2px at 250px 220px, rgba(220, 235, 255, 0.95) 50%, transparent 51%),
+        radial-gradient(1px 1px at 20px 120px, #fff 50%, transparent 51%);
+    background-size: 389px 347px, 457px 419px, 523px 491px, 317px 359px;
+    animation: twinkle 5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.35; }
+    to   { opacity: 1; }
+}
+
+/* --- Cristal kyber en fond, au centre de l'écran ---
+   Photo réelle de cristaux de quartz sur fond noir (voir les crédits dans le footer).
+   - background-blend-mode: color → la photo prend la teinte du sabre en gardant ses reflets ;
+   - mix-blend-mode: screen     → le fond noir de la photo disparaît sur la page sombre.
+   main::before = halo lumineux, main::after = la photo du cristal */
+body {
+    --crystal: var(--saber);
+}
+body.saber-dark {
+    --crystal: #9aa3ad; /* sabre noir : cristal argenté au halo blanc */
+}
+
+main::before,
+main::after {
+    content: '';
+    position: fixed;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    pointer-events: none;
+}
+
+main::before {
+    width: min(80vh, 760px);
+    height: min(80vh, 760px);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--saber-glow), transparent);
+    opacity: 0.2;
+    filter: blur(40px);
+    transform: translate(-50%, -50%);
+    animation: crystal-pulse 4s ease-in-out infinite;
+}
+
+main::after {
+    width: min(70vh, 640px);
+    height: min(70vh, 640px);
+    background:
+        linear-gradient(var(--crystal), var(--crystal)),
+        url('../img/kyber-crystal.jpg') center / contain no-repeat;
+    background-blend-mode: color;
+    mix-blend-mode: screen;
+    /* fondu sur les bords pour qu'aucun contour de photo ne soit visible */
+    -webkit-mask-image: radial-gradient(closest-side, #000 60%, transparent);
+    mask-image: radial-gradient(closest-side, #000 60%, transparent);
+    opacity: 0.4;
+    transform: translate(-50%, -50%);
+    animation: crystal-float 7s ease-in-out infinite;
+}
+
+@keyframes crystal-float {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50%      { transform: translate(-50%, calc(-50% - 14px)); }
+}
+
+@keyframes crystal-pulse {
+    0%, 100% { opacity: 0.14; }
+    50%      { opacity: 0.26; }
+}
+
+/* Allumage d'une lame : elle se déploie depuis la garde */
+@keyframes ignite {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+}
+
+/* Léger bourdonnement de la lame */
+@keyframes hum {
+    0%, 100% { filter: brightness(1); }
+    50%      { filter: brightness(1.18); }
+}
+
+a {
+    color: var(--saber);
+}
+
+:focus-visible {
+    outline: 2px solid var(--saber);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--saber);
+    color: #000;
+}
+
+.container {
+    padding: 5rem 8%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Navigation --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 6%;
+    background: rgba(4, 6, 11, 0.82);
+    backdrop-filter: blur(12px);
+}
+
+/* La bordure basse de la barre est une lame qui s'allume au chargement */
+.navbar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--saber-core);
+    box-shadow: var(--blade-glow);
+    transform-origin: left;
+    animation: ignite 0.9s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    letter-spacing: 0.18em;
+    color: #fff;
+    text-shadow: 0 0 10px var(--saber-glow);
+}
+
+/* Mini sabre à côté du logo */
+.logo-saber {
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo-saber::before {
+    content: '';
+    width: 30px;
+    height: 7px;
+    background: url('../img/saber-hilt.svg') center / contain no-repeat;
+}
+
+.logo-saber::after {
+    content: '';
+    width: 30px;
+    height: 3px;
+    border-radius: 0 999px 999px 0;
+    background: linear-gradient(var(--saber), var(--saber-core) 35% 65%, var(--saber));
+    box-shadow: 0 0 3px var(--saber), 0 0 8px var(--saber-glow), 0 0 16px var(--saber-glow);
+    transform-origin: left;
+    animation: ignite 0.5s 0.3s ease-out both, hum 2.5s ease-in-out infinite;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.6rem;
+    align-items: center;
+}
+
+/* Chaque lien prend la couleur du sabre de la page vers laquelle il mène */
+.nav-links a { --link: var(--saber); }
+.nav-links a[href$="index.html"]    { --link: var(--c-blue); }
+.nav-links a[href$="projects.html"] { --link: var(--c-green); }
+.nav-links a[href$="stages.html"]   { --link: var(--c-yellow); }
+.nav-links a[href$="veille.html"]   { --link: var(--c-red); }
+.nav-links a[href$="bilan.html"]    { --link: var(--c-white); }
+.nav-links a[href$="contact.html"]  { --link: var(--c-dark); }
+.nav-links a.active                 { --link: var(--saber); }
+
+.nav-links a {
+    position: relative;
+    display: inline-block;
+    padding: 0.3rem 0;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff;
+    box-shadow: 0 0 4px var(--link), 0 0 10px var(--link);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--link);
+    text-shadow: 0 0 10px var(--link);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    transform: scaleX(1);
+}
+
+.nav-links a.btn-contact {
+    padding: 0.45rem 1.1rem;
+    border: 1px solid var(--link);
+    border-radius: 4px;
+    color: var(--link);
+}
+
+.nav-links a.btn-contact::after {
+    display: none;
+}
+
+.nav-links a.btn-contact:hover {
+    background: var(--link);
+    color: #000;
+    text-shadow: none;
+    box-shadow: 0 0 16px var(--link);
+}
+
+/* Espace sous la navbar fixe (pages sans hero) */
+body.subpage main {
+    padding-top: 80px;
+}
+
+/* --- Titres --- */
+h1, h2, h3, h4 {
+    color: #fff;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.03em;
+    text-shadow: 0 0 18px var(--saber-glow);
+}
+
+h2 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 0 12px var(--saber-glow);
+}
+
+/* Lame sous chaque titre de section */
+h2::after {
+    content: '';
+    display: block;
+    width: min(180px, 50%);
+    height: 3px;
+    margin: 0.9rem auto 0;
+    border-radius: 3px;
+    background: var(--saber-core);
+    box-shadow: var(--blade-glow);
+    transform-origin: center;
+    animation: ignite 0.7s 0.2s ease-out both;
+}
+
+/* Quand un sabre suit le titre, il remplace la lame de soulignement */
+h2:has(+ .saber)::after {
+    display: none;
+}
+
+h2:has(+ .saber) {
+    margin-bottom: 0;
+}
+
+h2 + .saber {
+    margin-bottom: 3rem;
+}
+
+/* Petit surtitre facultatif : <h2 data-kicker="Épisode I"> */
+h2[data-kicker]::before {
+    content: attr(data-kicker);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.4em;
+    color: var(--saber);
+    text-shadow: none;
+}
+
+h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+strong {
+    color: #fff;
+}
+
+/* --- Sabre laser décoratif ---
+   Poignée : dessin SVG métallique (img/saber-hilt.svg).
+   Lame : cœur blanc, bords colorés, halo en plusieurs couches et léger scintillement. */
+.saber {
+    position: relative;
+    isolation: isolate; /* le halo (::before) reste derrière la poignée et la lame */
+    display: flex;
+    align-items: center;
+    width: min(560px, 88%);
+    margin: 2.2rem auto;
+}
+
+/* Grand halo diffus : la lumière de la lame se répand autour d'elle */
+.saber::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 150px;
+    right: -14px;
+    top: calc(50% - 24px);
+    height: 48px;
+    border-radius: 999px;
+    background: var(--saber-glow);
+    filter: blur(26px);
+    opacity: 0.45;
+    transform-origin: left;
+    animation: ignite 0.8s 0.5s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.saber .hilt {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    width: 150px;
+    height: 28px;
+    background: url('../img/saber-hilt.svg') center / contain no-repeat;
+    filter: drop-shadow(0 4px 5px rgba(0, 0, 0, 0.75));
+}
+
+/* Reflet coloré de la lame sur le métal de l'émetteur (limité à la forme de la poignée) */
+.saber .hilt::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 45% 120% at 100% 50%, var(--saber), transparent 70%);
+    -webkit-mask: url('../img/saber-hilt.svg') center / contain no-repeat;
+    mask: url('../img/saber-hilt.svg') center / contain no-repeat;
+    mix-blend-mode: screen;
+    animation: light-on 0.4s 0.5s ease-out both;
+}
+
+@keyframes light-on {
+    from { opacity: 0; }
+    to   { opacity: 0.75; }
+}
+
+.saber .blade {
+    position: relative;
+    flex: 1;
+    height: 9px;
+    margin-left: -3px;
+    border-radius: 0 999px 999px 0;
+    /* cœur blanc surexposé, fin liseré coloré sur les bords */
+    background: linear-gradient(
+        var(--saber) 0%,
+        color-mix(in srgb, var(--saber-core) 60%, var(--saber)) 14%,
+        var(--saber-core) 26% 74%,
+        color-mix(in srgb, var(--saber-core) 60%, var(--saber)) 86%,
+        var(--saber) 100%);
+    box-shadow:
+        0 0 2px var(--saber-core),
+        0 0 6px var(--saber),
+        0 0 14px var(--saber),
+        0 0 30px var(--saber-glow),
+        0 0 60px var(--saber-glow),
+        0 0 110px color-mix(in srgb, var(--saber-glow) 45%, transparent);
+    transform-origin: left;
+    animation:
+        ignite 0.8s 0.5s cubic-bezier(.2, .8, .2, 1) both,
+        hum 2.5s 1.3s ease-in-out infinite,
+        flicker 3.2s 1.3s steps(1) infinite;
+}
+
+/* Éclat plus intense à la sortie de l'émetteur */
+.saber .blade::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    width: 22px;
+    height: 20px;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--saber-core), var(--saber) 55%, transparent);
+    filter: blur(3px);
+}
+
+/* Flux d'énergie qui parcourt la lame */
+.saber .blade::after {
+    content: '';
+    position: absolute;
+    inset: 1px 0;
+    border-radius: inherit;
+    background: repeating-linear-gradient(90deg,
+        transparent 0 22px,
+        rgba(255, 255, 255, 0.55) 30px,
+        transparent 38px 64px);
+    background-size: 64px 100%;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+    animation: energy 0.7s linear infinite;
+}
+
+@keyframes energy {
+    from { background-position: 0 0; }
+    to   { background-position: 64px 0; }
+}
+
+/* Petites variations de luminosité, comme une lame instable */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    41%      { opacity: 0.93; }
+    42%      { opacity: 1; }
+    73%      { opacity: 0.96; }
+    74%      { opacity: 1; }
+}
+
+/* --- Panneaux (style holoprojecteur) --- */
+.content-block,
+.role-card,
+.eval-item {
+    position: relative;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 2rem;
+    color: var(--text);
+    backdrop-filter: blur(6px);
+}
+
+/* Lame verticale sur le bord gauche des blocs de contenu */
+.content-block::before {
+    content: '';
+    position: absolute;
+    left: -1px;
+    top: 14px;
+    bottom: 14px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--saber-core);
+    box-shadow: var(--blade-glow);
+}
+
+.role-card {
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+    border-top: 2px solid var(--saber-soft);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.role-card:hover {
+    border-top-color: var(--saber);
+    box-shadow: 0 -6px 24px -10px var(--saber-glow);
+}
+
+.role-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.6rem;
+    color: var(--saber);
+}
+
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0 2rem;
+}
+
+/* --- Boutons --- */
+.cta-button {
+    display: inline-block;
+    padding: 0.95rem 2.4rem;
+    border: 1px solid var(--saber);
+    border-radius: 4px;
+    background: var(--saber-faint);
+    color: #fff;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 0 12px -2px var(--saber-glow), inset 0 0 12px -4px var(--saber-glow);
+    transition: 0.3s;
+}
+
+.cta-button:hover {
+    background: var(--saber);
+    color: #000;
+    box-shadow: 0 0 22px var(--saber), 0 0 44px var(--saber-glow);
+    transform: translateY(-3px);
+}
+
+/* --- Cartes de projets / stages --- */
+.projects-section {
+    padding: 5rem 8%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    align-items: start; /* chaque carte garde sa hauteur : seule celle qu'on ouvre s'agrandit */
+}
+
+.project-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* Lame qui s'allume en haut de la carte au survol */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 3px;
+    background: var(--saber-core);
+    box-shadow: var(--blade-glow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s cubic-bezier(.2, .8, .2, 1);
+}
+
+.project-card:hover::before,
+.project-card.active::before {
+    transform: scaleX(1);
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--saber-soft);
+    box-shadow: 0 14px 40px -12px var(--saber-glow);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: saturate(0.85) brightness(0.9);
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.06);
+    filter: saturate(1.05) brightness(1.05);
+}
+
+.project-info {
+    padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.project-info h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    text-shadow: 0 0 10px var(--saber-glow);
+}
+
+.project-info p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 1.25rem;
+}
+
+.btn-detail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--saber-soft);
+    color: var(--saber);
+    padding: 0.55rem 1.1rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-detail:hover {
+    background: var(--saber);
+    border-color: var(--saber);
+    color: #000;
+    box-shadow: 0 0 16px var(--saber-glow);
+}
+
+.btn-detail .arrow {
+    display: inline-block;
+    font-size: 0.65rem;
+    transition: transform 0.3s;
+}
+
+.project-card.active .btn-detail .arrow {
+    transform: rotate(180deg);
+}
+
+.project-details {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0 1.5rem;
+    border-top: 1px solid transparent;
+    transition: max-height 0.45s ease, opacity 0.35s ease, padding 0.45s ease, border-color 0.45s ease;
+}
+
+.project-card.active .project-details {
+    max-height: 600px;
+    opacity: 1;
+    padding: 1.25rem 1.5rem 1.5rem;
+    border-top-color: var(--saber-soft);
+}
+
+.project-details p {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+.project-details strong {
+    color: var(--saber);
+}
+
+.detail-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: var(--saber);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.detail-link:hover {
+    text-shadow: 0 0 10px var(--saber-glow);
+}
+
+/* --- Pages de détail (projet, stage) --- */
+.project-hero {
+    text-align: center;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    color: var(--saber);
+    text-shadow: 0 0 8px var(--saber-glow);
+}
+
+.eyebrow {
+    color: var(--saber);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.project-hero h1 {
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+}
+
+.subtitle {
+    color: var(--text-dim);
+    font-size: 1.08rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- Composants des pages de détail --- */
+.sub-heading {
+    text-align: center;
+    margin: 3rem 0 1.25rem;
+    font-size: 1.05rem;
+}
+
+.block-gap {
+    margin-top: 2rem;
+}
+
+code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9em;
+    color: var(--saber);
+}
+
+.section-intro {
+    max-width: 760px;
+    margin: -1rem auto 2rem;
+    text-align: center;
+    color: var(--text-dim);
+}
+
+.content-block p + p,
+.content-block p + ul,
+.content-block ul + p {
+    margin-top: 1rem;
+}
+
+.content-block ul,
+.role-card ul {
+    padding-left: 1.2rem;
+}
+
+.content-block li,
+.role-card li {
+    margin-bottom: 0.4rem;
+}
+
+/* Étiquettes (technologies, outils) */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+}
+
+.tag {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--saber-soft);
+    border-radius: 999px;
+    background: var(--saber-faint);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+/* Tableaux de données */
+.table-scroll {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--panel);
+    backdrop-filter: blur(6px);
+}
+
+.data-table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+.data-table th {
+    color: var(--saber);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--saber-faint);
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table td:first-child {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Statuts (écart, conformité...) */
+.status {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-ok {
+    color: var(--c-green);
+    background: color-mix(in srgb, var(--c-green) 12%, transparent);
+}
+
+.status-warn {
+    color: var(--c-orange);
+    background: color-mix(in srgb, var(--c-orange) 12%, transparent);
+}
+
+/* Étapes numérotées (phases, découpage des tâches) */
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    counter-reset: step;
+}
+
+.steps > li {
+    position: relative;
+    padding: 1.5rem 1.5rem 1.4rem;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    counter-increment: step;
+}
+
+.steps > li::before {
+    content: counter(step, decimal-leading-zero);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--saber);
+    text-shadow: 0 0 10px var(--saber-glow);
+}
+
+.steps h3 {
+    font-size: 0.98rem;
+    margin-bottom: 0.4rem;
+}
+
+.steps p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+.steps .step-meta {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--saber);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* Chaîne de dépendances : A → B → C */
+.flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem 2.4rem;
+    list-style: none;
+    padding: 0;
+}
+
+.flow li {
+    position: relative;
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--saber-soft);
+    border-radius: 6px;
+    background: var(--panel);
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.flow li + li::before {
+    content: '→';
+    position: absolute;
+    left: -1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--saber);
+    text-shadow: 0 0 8px var(--saber-glow);
+}
+
+.validation {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-dim);
+    font-size: 0.88rem;
+}
+
+.validation strong {
+    color: var(--saber);
+}
+
+/* Galerie de captures d'écran */
+.screens-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.card {
+    position: relative;
+    margin: 0;
+    background: var(--panel);
+    border: 1px solid var(--saber-soft);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.35s, box-shadow 0.35s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px -6px var(--saber-glow);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card figcaption {
+    padding: 0.9rem 1.1rem;
+    border-top: 1px solid var(--saber-soft);
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* --- Footer --- */
+footer {
+    padding: 3rem 1rem;
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+}
+
+footer .photo-credit {
+    margin-top: 0.6rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+    text-transform: none;
+    opacity: 0.7;
+}
+
+footer .photo-credit a {
+    color: inherit;
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 0.8rem 5% 0.6rem;
+    }
+    .nav-links {
+        width: 100%;
+        gap: 1.1rem;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 0.4rem;
+        scrollbar-width: none;
+    }
+    .nav-links a { font-size: 0.72rem; }
+    body.subpage main { padding-top: 115px; }
+    /* Cristal plus discret sur mobile */
+    main::after { width: 90vw; height: 90vw; opacity: 0.3; }
+    .container,
+    .projects-section { padding: 3.5rem 6%; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .roles-grid { grid-template-columns: 1fr; }
+}
+
+/* Respecte les préférences d'animation réduite */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+    html { scroll-behavior: auto; }
+}

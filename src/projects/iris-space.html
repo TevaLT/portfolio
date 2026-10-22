@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Teva | Projet Iris Space</title>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../../style/theme.css">
+	<link rel="stylesheet" href="../../style/projects-css/iris-space.css">
+</head>
+<body class="subpage saber-pink">
+	<header>
+		<nav class="navbar">
+			<div class="logo"><span class="logo-saber"></span>PORTFOLIO</div>
+			<ul class="nav-links">
+				<li><a href="../../index.html">Accueil</a></li>
+				<li><a href="../projects.html" class="active">Projets</a></li>
+				<li><a href="../stages.html">Stages</a></li>
+				<li><a href="../veille.html">Veille</a></li>
+				<li><a href="../bilan.html">Synthèse</a></li>
+				<li><a href="../contact.html" class="btn-contact">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<main>
+		<!-- ===== En-tête du projet ===== -->
+		<section class="project-hero container">
+			<a href="../projects.html" class="back-link">&larr; Retour aux projets</a>
+			<p class="eyebrow">Projet de classe · SLAM · Mai – octobre 2026</p>
+			<h1>Iris Space — Espace numérique de l'école</h1>
+			<p class="subtitle">Conception et développement d'une application web pour une meilleure communication entre l'administration, les professeurs et les élèves.</p>
+			<div class="saber" aria-hidden="true"><span class="hilt"></span><span class="blade"></span></div>
+			<div class="iris-logo">
+				<img src="../../img/Logo IRIS SPACE.svg" alt="Logo Iris Space">
+			</div>
+		</section>
+
+		<!-- ===== Contexte ===== -->
+		<section class="container">
+			<h2>Contexte</h2>
+			<div class="content-block">
+				<p>Iris Space est un <strong>projet de classe</strong> portant sur la création et la refonte du site de l'école Iris. L'objectif est de réunir dans une même application les échanges entre l'<strong>administration</strong>, les <strong>professeurs</strong> et les <strong>élèves</strong> : absences, emploi du temps, notes, documents, actualités et messagerie.</p>
+				<p>Le projet est mené à plusieurs étudiants sur un dépôt Git commun. Chacun développe ses pages sur une branche dédiée, puis les intègre au projet par une Pull Request.</p>
+			</div>
+		</section>
+
+		<!-- ===== Les espaces ===== -->
+		<section class="container">
+			<h2>Cinq espaces, un seul site</h2>
+			<p class="section-intro">L'utilisateur se connecte, puis il est redirigé vers l'espace qui correspond à son profil. Chaque espace a sa propre navigation.</p>
+			<div class="spaces-grid">
+				<div class="role-card">
+					<h3>Administration</h3>
+					<p>Tableau de bord, absences, emplois du temps, messages, documents et publication des actualités.</p>
+				</div>
+				<div class="role-card">
+					<h3>Professeur</h3>
+					<p>Devoirs, notes, actualité, emploi du temps, arborescence, profil et messagerie. Certaines pages sont encore en construction.</p>
+				</div>
+				<div class="role-card">
+					<h3>Élève</h3>
+					<p>Tableau de bord du jour, notes, profil, actualité, devoirs, vie scolaire, emploi du temps, documents et messages.</p>
+				</div>
+				<div class="role-card">
+					<h3>Visiteur</h3>
+					<p>Accès sans compte aux actualités de l'école et à une page « À propos ».</p>
+				</div>
+				<div class="role-card">
+					<h3>MediaSchool</h3>
+					<p>Pages du groupe MediaSchool : accueil, plages et événements.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- ===== Technologies ===== -->
+		<section class="container">
+			<h2>Technologies</h2>
+			<ul class="tag-list">
+				<li class="tag">React 19</li>
+				<li class="tag">Vite</li>
+				<li class="tag">React Router</li>
+				<li class="tag">Tailwind CSS</li>
+				<li class="tag">daisyUI</li>
+				<li class="tag">Tabler Icons</li>
+				<li class="tag">localStorage</li>
+				<li class="tag">Git / GitHub</li>
+			</ul>
+			<div class="content-block block-gap">
+				<p>Le site a d'abord été réalisé en <strong>HTML, CSS (Tailwind) et JavaScript vanilla</strong>, avec une page HTML et un script par écran. En octobre 2026, l'application a été convertie en <strong>React</strong> (Vite + React Router) : chaque page devient un composant, et les éléments partagés (navbar, menu mobile, footer, messagerie) sont mis en commun.</p>
+				<p>C'est un <strong>prototype sans serveur</strong> : les données de démonstration (absences, cours, actualités, conversations, messages non lus) sont enregistrées dans le <code>localStorage</code> du navigateur. Un panneau « DEV » permet de réinitialiser ces données pendant les tests, et la connexion se fait avec des comptes de test (administrateur et élève).</p>
+			</div>
+		</section>
+
+		<!-- ===== Mon rôle ===== -->
+		<section class="container">
+			<h2>Mon rôle</h2>
+			<p class="section-intro">J'ai développé une partie de l'espace administration et de l'espace élève. Ces pages ont ensuite été reprises dans la version React de l'application.</p>
+			<ol class="steps">
+				<li>
+					<span class="step-meta">Juin 2026 · Administration</span>
+					<h3>Page des absences</h3>
+					<p>Tableau des élèves absents du jour. Un clic sur le nom d'un élève affiche sa fiche sous la ligne : responsable, téléphone, email et statut de justification. Une seule fiche reste ouverte à la fois. Le comportement est codé en JavaScript vanilla.</p>
+				</li>
+				<li>
+					<span class="step-meta">Juillet 2026 · Élève</span>
+					<h3>Tableau de bord élève</h3>
+					<p>Page d'accueil de l'élève : emploi du temps du jour avec navigation par date, travail à faire, dernières ressources, vie scolaire, dernières notes et actualités. J'ai aussi retravaillé la barre de navigation de l'espace élève.</p>
+				</li>
+				<li>
+					<span class="step-meta">Juillet 2026 · Élève</span>
+					<h3>Page des notes</h3>
+					<p>Tableau des notes de l'élève, avec la matière, le professeur et la date de chaque évaluation.</p>
+				</li>
+				<li>
+					<span class="step-meta">Juillet 2026 · Connexion</span>
+					<h3>Connexion de l'élève</h3>
+					<p>Ajout du compte de test élève dans le script de connexion, avec la redirection vers l'espace élève.</p>
+				</li>
+			</ol>
+		</section>
+
+		<!-- ===== Captures ===== -->
+		<section class="container">
+			<h2>Visualisation des réalisations</h2>
+			<p class="section-intro">Captures de la version React actuelle. Les noms et les notes affichés sont des données fictives de démonstration.</p>
+			<div class="screens-grid">
+				<figure class="card">
+					<img src="../../img/iris-space-absences.png" alt="Page Absences de l'espace administration d'Iris Space">
+					<figcaption>Administration — absences du jour (cliquer sur un élève ouvre sa fiche de contact)</figcaption>
+				</figure>
+				<figure class="card">
+					<img src="../../img/iris-space-accueil-eleve.png" alt="Tableau de bord de l'espace élève d'Iris Space">
+					<figcaption>Élève — tableau de bord du jour</figcaption>
+				</figure>
+				<figure class="card">
+					<img src="../../img/iris-space-notes.png" alt="Page Mes notes de l'espace élève d'Iris Space">
+					<figcaption>Élève — page « Mes notes »</figcaption>
+				</figure>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		<p>&copy; 2026 Teva - Tous droits réservés</p>
+		<p class="photo-credit">Cristal en fond : photo « <a href="https://commons.wikimedia.org/wiki/File:Quartz,_Tibet.jpg" target="_blank" rel="noopener noreferrer">Quartz, Tibet</a> » de JJ Harrison, licence <a href="https://creativecommons.org/licenses/by-sa/2.5/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.5</a>, via Wikimedia Commons</p>
+	</footer>
+</body>
+</html>
